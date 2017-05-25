@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="administrator.cs" />
-    <Compile Include="member.cs" />
+    <Compile Include="Administrator.cs" />
+    <Compile Include="MemberInformation.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
