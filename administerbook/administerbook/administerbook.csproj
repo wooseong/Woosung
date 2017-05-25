@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,9 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="administrator.cs" />
+    <Compile Include="member.cs" />
     <Compile Include="Menu.cs" />
-    <Compile Include="main.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BookVO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

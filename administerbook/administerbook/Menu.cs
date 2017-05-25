@@ -5,41 +5,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-
-class Menu
+namespace administerbook
 {
-    private string menu_choice_check;
-    private int menu_choice;
-
-    public void Menu_list()
+    class Menu
     {
-        do
+        private string getMainMenuNumberCheck;
+        private int getMainMenuNumber;
+
+        public int MenuList()
         {
-            Console.WriteLine("  1. 회원 모드");
-            Console.WriteLine("  2. 관리자 모드");
-            Console.WriteLine("  3. exit");
-            Console.Write("\n  ");
-
-            menu_choice_check = Console.ReadLine();
-            if (!(menu_choice_check.Equals("1") || menu_choice_check.Equals("2") || menu_choice_check.Equals("3")))
+            do
             {
-                Console.WriteLine("  잘못입력하셨습니다.");
-                Console.WriteLine("  다시 선택하여 주십시오.....");
-                Thread.Sleep(500);
-                continue;
-            }
+                Console.Clear();
+                Console.Write("\n\n\n\n\n\n\n");
+                Console.WriteLine("\t\t\t\t\t\t Main Menu\n");
+                Console.WriteLine("\t\t\t\t\t\t 1. Sign in");
+                Console.WriteLine("\t\t\t\t\t\t 2. Sign out");
+                //Console.WriteLine("\t\t\t\t\t\t 3. 아이비/비밀번호 찾기\n");
+                Console.WriteLine("\t\t\t\t\t\t Esc. exit");
+                Console.Write("\n\t\t\t\t\t\t");
 
-            menu_choice = int.Parse(menu_choice_check);
-            if (menu_choice == 1)
-            {
-            }
-            else if (menu_choice == 2)
-            {
-            }
-            else if (menu_choice == 3)
-                break;
 
-        } while (true);
+                getMainMenuNumberCheck = Console.ReadLine(); //getMainMenuNumber에 입력 받아오기
+               // if (getMainMenuNumberCheck. == ConsoleKey.Escape) // Esc키인지 확인 -> 프로그램 종료
+                //{
+                    //Console.Write("Esc");
+                    //Console.Read();
+                //    return 0;
+              //  }
+              //  else
+              //  {
+                    if (!(getMainMenuNumberCheck.Equals("1") || getMainMenuNumberCheck.Equals("2")))
+                    {
+                        Console.Write("\t\t\t\t\t\t 잘못된 입력입니다.");
+                        Thread.Sleep(500);
+                    }
+                    else
+                    {
+                        getMainMenuNumber = int.Parse(getMainMenuNumberCheck);
+                        if (getMainMenuNumberCheck.Equals("1") ) // Login메뉴
+                        {
+                        }
+                        else if ( getMainMenuNumberCheck.Equals("2") ) // 회원 가입 메뉴
+                        {
+                            Console.Write("2");
+                            Thread.Sleep(1000);
+                        }
+                 //   }   
+                }
+            } while (true);
+        }
     }
 }
 

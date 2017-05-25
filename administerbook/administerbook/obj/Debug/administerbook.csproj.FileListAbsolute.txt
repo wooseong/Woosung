@@ -1,0 +1,6 @@
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\bin\Debug\administerbook.exe.config
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\bin\Debug\administerbook.exe
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\bin\Debug\administerbook.pdb
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\obj\Debug\administerbook.csprojResolveAssemblyReference.cache
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\obj\Debug\administerbook.exe
+C:\Users\신우성\Documents\세종대\En#\과제3\administerbook\administerbook\obj\Debug\administerbook.pdb
