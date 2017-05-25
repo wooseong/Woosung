@@ -4,7 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Administrator//관리자
+namespace administerbook
 {
+    class Administrator//관리자
+    {
+        public void MemberAdministrate()
+        {
 
+        }
+    }
 }
