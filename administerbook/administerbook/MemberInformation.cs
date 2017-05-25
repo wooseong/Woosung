@@ -11,6 +11,8 @@ namespace administerbook
         private string name;
         private string id;
         private string password;
+        private List<BookVO> borrow = new List<BookVO>();
+        private int borrowCount=0;
 
        public MemberInformation(string name, string id, string password)
         {
@@ -38,6 +40,18 @@ namespace administerbook
             get
             { return password; }
             set { password = value; }
+        }
+        public List<BookVO> Borrow
+        {
+            get
+            { return borrow; }
+            set { borrow = value; }
+
+        }
+        public int BorrowCount
+        {
+            get { return borrowCount; }
+            set { borrowCount = value; }
         }
     }
 }
