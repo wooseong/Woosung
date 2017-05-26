@@ -11,6 +11,7 @@ namespace administerbook
         static void Main(string[] args)
         {
             Menu menu = new Menu();
+            Console.SetWindowSize(180,40);
             menu.MenuList();
             
         }
