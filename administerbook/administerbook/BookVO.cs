@@ -10,7 +10,8 @@ class BookVO
     private string writer;
     private string price;
     private bool someoneBorrow=false;
-    private string borrowTime;
+    private string borrowTime="";
+    private string borrowPersonName;
 
     public BookVO(string name, string writer, string price)
     {
@@ -45,6 +46,11 @@ class BookVO
     {
         get { return borrowTime; }
         set { borrowTime = value; }
+    }
+    public string BorrowPersonName
+    {
+        get { return borrowPersonName; }
+        set { borrowPersonName = value; }
     }
 }
 

@@ -160,6 +160,16 @@ namespace administerbook
                             break;
                         }
                     }
+                    if (id.Equals("빵빵덕"))
+                    {
+                        Console.Write("\t\t\t\t\t\t\t\t 같은 ID가 존재합니다. 다시 입력하세요");
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                        Console.Write("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t(0입력 시 뒤로가기)\n\n\n\n\n");
+                        Console.WriteLine("\t\t\t\t\t\t\t\t\t\t Sign up\n");
+                        Console.WriteLine("\t\t\t\t\t\t\t\t Name(본인의 이름을 입력하세요 2~20자 이내) - {0}", name);
+                        memberCheck = 1; // 회원 정보를 찾으면이 되면 1, 못 찾으면 0 유지
+                    }
                     if (memberCheck == 0)
                         break;
                     memberCheck = 0;
@@ -547,9 +557,9 @@ namespace administerbook
                     Console.Clear();
                     Console.Write("\n\n\n\n\n\n\n");
                     Console.WriteLine("★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★★☆★☆★☆★☆★☆★☆★☆★☆★☆★관리자 페이지★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★★☆★☆★☆★☆★☆★☆★☆★☆★☆★\n");
-                    Console.WriteLine("\t\t\t\t\t이름\t\t\t\t\t저자\t\t\t\t\t    가격\t\t대출 여부(False = 대출 가능, True = 대출 불가)");
+                    Console.WriteLine("\t\t\t이름\t\t\t\t저자\t\t\t가격\t대출 여부(False = 대출 가능, True = 대출 불가)\t 대출한 사람\t\t대여 및 반납시간");
                     foreach (BookVO i in bookInformationList)
-                        Console.WriteLine("\t\t\t{0,20}\t\t\t{1,20}\t\t\t{2,20}\t\t{3}", i.Name, i.Writer, i.Price, i.SomeoneBorrrow);
+                        Console.WriteLine("\t{0,20}\t\t{1,20}\t\t  {2,10}\t{3}\t\t\t\t\t\t\t\t{4}\t\t{5}", i.Name, i.Writer, i.Price, i.SomeoneBorrrow, i.BorrowPersonName, i.BorrowTime);
                     Console.Write("\t\t\t");
                     Console.ReadLine();
                 }
@@ -814,11 +824,11 @@ namespace administerbook
             if (bookSearch.Equals("0")) return 0; // 0일 경우 뒤로 돌아가기 위해 , 값은 무의미
             Console.Clear();
             Console.Write("\n\n\n\n\n\n\n");
-            Console.WriteLine("\t\t\t\t\t이름\t\t\t\t\t저자\t\t\t\t\t    가격\t\t대출 여부(False = 대출 가능, True = 대출 불가)");
+            Console.WriteLine("\t\t\t이름\t\t\t\t저자\t\t\t가격\t대출 여부(False = 대출 가능, True = 대출 불가)\t 대출한 사람\t\t대여 및 반납시간");
             foreach (BookVO i in bookInformationList)
             {
                 if ((i.Name.Equals(bookSearch)) || (i.Writer.Equals(bookSearch)))
-                    Console.WriteLine("\t\t\t{0,20}\t\t\t{1,20}\t\t\t{2,20}\t\t{3}", i.Name, i.Writer, i.Price, i.SomeoneBorrrow);
+                    Console.WriteLine("\t{0,20}\t\t{1,20}\t\t  {2,10}\t{3}\t\t\t\t\t\t\t\t{4}\t\t{5}", i.Name, i.Writer, i.Price, i.SomeoneBorrrow, i.BorrowPersonName, i.BorrowTime);
             }
             Console.Write("\t\t\t");
             Console.ReadLine();
@@ -899,23 +909,30 @@ namespace administerbook
             Console.Write("\t\t\t\t\t\t\t\t\t writer를 입력하세요 - ");
             writer = Console.ReadLine();
             if (price.Equals("0")) return 0; // 0일 경우 뒤로 돌아가기 위해 , 값 무의미
-            foreach (BookVO i in bookInformationList)
-                if ((i.Name.Equals(name)) && (i.Writer.Equals(writer)))
+            for (int k = 0; k < bookNumber; k++)// (BookVO i in bookInformationList)
+            {
+                if ((bookInformationList[k].Name.Equals(name)) && (bookInformationList[k].Writer.Equals(writer)))
                 {
                     bookCheck = 1; // 도서 정보를 찾으면이 되면 1, 못 찾으면 0 유지
-                    if (i.SomeoneBorrrow) Console.WriteLine("\t\t\t\t\t\t\t\t\t 이미 누군가 대출 중인 도서입니다.");
+                    if (bookInformationList[k].SomeoneBorrrow)
+                    {
+                        Console.WriteLine("\t\t\t\t\t\t\t\t\t 이미 누군가 대출 중인 도서입니다.");
+                        Thread.Sleep(1000);
+                    }
                     else
                     {
-                        person.Borrow.Add(new BookVO(i.Name, i.Writer, i.Price));
+                        person.Borrow.Add(new BookVO(bookInformationList[k].Name, bookInformationList[k].Writer, bookInformationList[k].Price));
                         (person.BorrowCount)++;
-                        i.SomeoneBorrrow = true;
-                        i.BorrowTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-                        Console.WriteLine("\t\t\t\t\t\t\t\t\t 책 {0} 이 대출 되셨습니다.", i.Name);
-                        Console.WriteLine("\t\t\t\t\t\t\t\t\t {0}", i.BorrowTime);
+                        bookInformationList[k].SomeoneBorrrow = true;
+                        bookInformationList[k].BorrowTime = person.Borrow[person.BorrowCount - 1].BorrowTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+                        bookInformationList[k].BorrowPersonName = person.Name;
+                        Console.WriteLine("\t\t\t\t\t\t\t\t\t 책 {0} 이 대출 되셨습니다.", bookInformationList[k].Name);
+                        Console.WriteLine("\t\t\t\t\t\t\t\t\t {0}", bookInformationList[k].BorrowTime);
                         Console.Write("\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t");
                         Console.ReadLine();
                     }
                 }
+            }
             if (bookCheck == 0) // 도서 정보를 찾으면이 되면 1, 못 찾으면 0 유지
             {
                 Console.WriteLine("\t\t\t\t\t\t\t\t\t 등록되지 않은 도서 입니다.");
@@ -943,14 +960,23 @@ namespace administerbook
 
                     Console.WriteLine("\t\t\t\t\t\t\t\t\t 책 {0} 이 반납 되셨습니다.", person.Borrow[k].Name);
                     person.Borrow.RemoveAt(k);
-                    person.Borrow[k].SomeoneBorrrow = false;
-                    person.Borrow[k].BorrowTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
                     (person.BorrowCount)--;
-                    Console.WriteLine("\t\t\t\t\t\t\t\t\t {0}", person.Borrow[k].BorrowTime);
-                    Console.Write("\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t");
-                    Console.ReadLine();
-                    break;
 
+
+                    for (int l = 0; l < bookNumber; l++)// (BookVO i in bookInformationList)
+                    {
+                        if ((bookInformationList[l].Name.Equals(name)) && (bookInformationList[l].Writer.Equals(writer)))
+                        {
+                            bookInformationList[l].SomeoneBorrrow = false;
+                            bookInformationList[l].BorrowTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+                            bookInformationList[l].BorrowPersonName = "";
+                            Console.WriteLine("\t\t\t\t\t\t\t\t\t {0}", bookInformationList[l].BorrowTime);
+                            Console.Write("\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t");
+                            Console.ReadLine();
+                            break;
+                        }
+                    }
+                    break;
                 }
             }
             if (bookCheck == 0) // 도서 정보를 찾으면이 되면 1, 못 찾으면 0 유지
